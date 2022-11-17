@@ -202,7 +202,7 @@ class LoadJobProcessHandler(BaseProcessHandler):
                 if msg.time_extracted else datetime.utcnow().isoformat()
             nr["_time_loaded"] = datetime.utcnow().isoformat()
 
-        data = bytes(json.dumps(nr, cls=DecimalEncoder) + "\n", "UTF-8")
+        data = bytes(json.dumps(nr, cls=DecimalEncoder, ensure_ascii=False) + "\n", "UTF-8")
         self.rows[stream].write(data)
 
         yield from ()
